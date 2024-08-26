@@ -1,12 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { PokemonContext } from "../context/pokemonContext";
+import { useContext } from "react";
 
 const Card = styled.div``;
 
 const Button = styled.button``;
 
-function PokemonCard({ pokemon, onAddd, onRemove, isSelected }) {
+function PokemonCard({ pokemon, onAddd, isSelected }) {
   const navigate = useNavigate();
+  const { selectedPokemon, setSelectedPokemon } = useContext(PokemonContext);
+
+  const removePokemon = (pokemon) => {
+    const filteredPokemon = selectedPokemon.filter(
+      (poke) => poke.id !== pokemon.id
+    );
+    setSelectedPokemon(filteredPokemon);
+  };
 
   return (
     <Card>
@@ -17,7 +27,7 @@ function PokemonCard({ pokemon, onAddd, onRemove, isSelected }) {
       {isSelected ? (
         <Button
           onClick={() => {
-            onRemove();
+            removePokemon(pokemon);
           }}
         >
           삭제
@@ -25,7 +35,7 @@ function PokemonCard({ pokemon, onAddd, onRemove, isSelected }) {
       ) : (
         <Button
           onClick={() => {
-            onAddd();
+            onAddd(pokemon);
           }}
         >
           추가

@@ -3,7 +3,8 @@ import PokemonCard from "./PokemonCard";
 
 const DashboardContainer = styled.div``;
 
-const Dashboard = ({ selectedPokemon, onRemovePokemon }) => {
+const Dashboard = ({ selectedPokemon }) => {
+  console.log(selectedPokemon);
   return (
     <DashboardContainer>
       <h2>대시보드</h2>
@@ -12,14 +13,7 @@ const Dashboard = ({ selectedPokemon, onRemovePokemon }) => {
       ) : (
         <ul>
           {selectedPokemon.map((pokemon) => (
-            <PokemonCard
-              key={pokemon.id}
-              pokemon={pokemon}
-              onRemove={() => {
-                onRemovePokemon(pokemon);
-              }}
-              isSelected={true}
-            />
+            <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={true} />
           ))}
         </ul>
       )}
