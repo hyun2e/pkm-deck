@@ -7,7 +7,7 @@ const Card = styled.div``;
 
 const Button = styled.button``;
 
-function PokemonCard({ pokemon, onAddd, isSelected }) {
+function PokemonCard({ pokemon, isSelected }) {
   const navigate = useNavigate();
   const { selectedPokemon, setSelectedPokemon } = useContext(PokemonContext);
 
@@ -16,6 +16,23 @@ function PokemonCard({ pokemon, onAddd, isSelected }) {
       (poke) => poke.id !== pokemon.id
     );
     setSelectedPokemon(filteredPokemon);
+  };
+
+  const addPokemon = (pokemon) => {
+    if (selectedPokemon.find((item) => item.id === pokemon.id)) {
+      alert("이미 등록된 포켓몬 입니다.");
+      return;
+    }
+
+    // 새로운 배열에 할당하여 길이를 체크 후 새 배열을 set
+    const newPokemon = [...selectedPokemon, pokemon];
+
+    if (newPokemon.length > 6) {
+      alert("최대 포캣몬 6개까지");
+      return;
+    }
+
+    setSelectedPokemon(newPokemon);
   };
 
   return (
@@ -35,7 +52,7 @@ function PokemonCard({ pokemon, onAddd, isSelected }) {
       ) : (
         <Button
           onClick={() => {
-            onAddd(pokemon);
+            addPokemon(pokemon);
           }}
         >
           추가

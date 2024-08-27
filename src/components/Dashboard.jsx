@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
+import { useContext } from "react";
+import { PokemonContext } from "../context/pokemonContext";
 
 const DashboardContainer = styled.div``;
 
-const Dashboard = ({ selectedPokemon }) => {
-  console.log(selectedPokemon);
+const Dashboard = () => {
+  const { selectedPokemon } = useContext(PokemonContext);
+
   return (
     <DashboardContainer>
       <h2>대시보드</h2>

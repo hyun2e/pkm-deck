@@ -3,16 +3,11 @@ import PokemonCard from "./PokemonCard";
 
 const ListContainer = styled.div``;
 
-const PokemonList = ({ pokemonList, onAddPokemon }) => {
+const PokemonList = ({ pokemonList }) => {
   return (
     <ListContainer>
       {pokemonList.map((pokemon) => (
-        <PokemonCard
-          key={pokemon.id}
-          pokemon={pokemon}
-          isSelected={false}
-          onAddd={onAddPokemon}
-        />
+        <PokemonCard key={pokemon.id} pokemon={pokemon} isSelected={false} />
       ))}
     </ListContainer>
   );
